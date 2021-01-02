@@ -1,0 +1,29 @@
+{
+  "name": "Board18",
+  "colors": {
+    "plain": "#ffeedd",
+    "yellow": "#ffff00",
+    "green": "#54d82b",
+    "brown": "#aa722a",
+    "gray": "#b3b3b3",
+
+    "offboard": "#fe6464",
+    "mountain": "#ee874b",
+    "water": "#2090ff",
+    "land": "#00aa00",
+    "river": "#bbd9e6",
+
+    "white": "#ffffff",
+    "black": "#000000",
+
+    "orange": "#ffa500",
+    "red": "#fe6464",
+
+    "track": "#000000",
+    "border": "#ffffff",
+    "town": "#000000",
+    "centerTown": "#000000",
+    "city": "#ffffff",
+    "halt": "#666666"
+  }
+}
