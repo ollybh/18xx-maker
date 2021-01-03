@@ -7,7 +7,7 @@
     "brown": "#aa722a",
     "gray": "#b3b3b3",
 
-    "offboard": "#fe6464",
+    "offboard": "#ff0000",
     "mountain": "#ee874b",
     "water": "#2090ff",
     "land": "#00aa00",
@@ -15,9 +15,7 @@
 
     "white": "#ffffff",
     "black": "#000000",
-
-    "orange": "#ffa500",
-    "red": "#fe6464",
+    "red": "#ff0000",
 
     "track": "#000000",
     "border": "#ffffff",
