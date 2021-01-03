@@ -124,18 +124,18 @@ const server = app.listen(9000);
   }
 
   setupB18(bname, version);
-  let counts = R.compose(
+  let tileCounts = R.compose(
     R.countBy(R.identity),
     R.map(R.prop("color")),
     sortTiles,
     R.uniq,
     R.map(getTile)
   )(R.keys(game.tiles));
-  let colors = R.keys(counts);
+  let trayNames = R.keys(tileCounts);
 
   // Tile Trays
-  for (let j = 0; j < colors.length; j++) {
-    let color = colors[j];
+  for (let j = 0; j < trayNames.length; j++) {
+    let color = trayNames[j];
 
     let tray = {
       type: "tile",
@@ -156,9 +156,10 @@ const server = app.listen(9000);
       R.map(getTile)
     )(R.keys(game.tiles));
 
+    const checkTileColor = (tile, color) => tile.color == color;
     R.mapObjIndexed((dups, id) => {
       let tile = getTile(id);
-      if (tile.color !== color) return;
+      if (!checkTileColor(tile, color)) return;
 
       // Merge tile with game tile
       if (R.is(Object, game.tiles[id])) {
@@ -277,10 +278,10 @@ const server = app.listen(9000);
   });
 
   // Board18 Tiles
-  for (let j = 0; j < colors.length; j++) {
-    let color = colors[j];
+  for (let j = 0; j < trayNames.length; j++) {
+    let color = trayNames[j];
 
-    let width = counts[color] * 150;
+    let width = tileCounts[color] * 150;
     let height = 900;
 
     console.log(`Printing ${bname}/${folder}/${id}/${capitalize(color)}.png`);
