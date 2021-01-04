@@ -131,12 +131,9 @@ const server = app.listen(9000);
     R.uniq,
     R.map(getTile)
   )(R.keys(game.tiles));
-  let trayNames = R.keys(tileCounts);
 
   // Tile Trays
-  for (let j = 0; j < trayNames.length; j++) {
-    let tileTray = trayNames[j];
-
+  for (let tileTray in tileCounts) {
     let tray = {
       type: "tile",
       tName: `${capitalize(tileTray)} Tiles`,
@@ -278,13 +275,13 @@ const server = app.listen(9000);
   });
 
   // Board18 Tiles
-  for (let j = 0; j < trayNames.length; j++) {
-    let tileTray = trayNames[j];
-
+  for (let tileTray in tileCounts) {
     let width = tileCounts[tileTray] * 150;
     let height = 900;
 
-    console.log(`Printing ${bname}/${folder}/${id}/${capitalize(tileTray)}.png`);
+    console.log(
+      `Printing ${bname}/${folder}/${id}/${capitalize(tileTray)}.png`
+    );
     await page.goto(
       `http://localhost:9000/games/${bname}/b18/tiles/${tileTray}?print=true`,
       { waitUntil: "networkidle2" }
