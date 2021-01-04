@@ -132,12 +132,16 @@ const server = app.listen(9000);
     R.map(getTile)
   )(R.keys(game.tiles));
 
+  let trayTitle = (tray) => `${capitalize(tray)} Tiles`;
+  let imageFile = (tray) => `images/${id}/${capitalize(tray)}.png`;
+  let checkTileColor = (tile, tray) => tile.color == tray;
+
   // Tile Trays
   for (let tileTray in tileCounts) {
     let tray = {
       type: "tile",
-      tName: `${capitalize(tileTray)} Tiles`,
-      imgLoc: `images/${id}/${capitalize(tileTray)}.png`,
+      tName: trayTitle(tileTray),
+      imgLoc: imageFile(tileTray),
       xStart: 24,
       yStart: 24,
       xStep: 150,
@@ -153,7 +157,6 @@ const server = app.listen(9000);
       R.map(getTile)
     )(R.keys(game.tiles));
 
-    const checkTileColor = (tile, color) => tile.color == color;
     R.mapObjIndexed((dups, id) => {
       let tile = getTile(id);
       if (!checkTileColor(tile, tileTray)) return;
