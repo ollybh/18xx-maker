@@ -135,12 +135,12 @@ const server = app.listen(9000);
 
   // Tile Trays
   for (let j = 0; j < trayNames.length; j++) {
-    let color = trayNames[j];
+    let tileTray = trayNames[j];
 
     let tray = {
       type: "tile",
-      tName: `${capitalize(color)} Tiles`,
-      imgLoc: `images/${id}/${capitalize(color)}.png`,
+      tName: `${capitalize(tileTray)} Tiles`,
+      imgLoc: `images/${id}/${capitalize(tileTray)}.png`,
       xStart: 24,
       yStart: 24,
       xStep: 150,
@@ -152,14 +152,14 @@ const server = app.listen(9000);
 
     let tiles = R.compose(
       R.uniq,
-      R.filter(R.propEq("color", color)),
+      R.filter(R.propEq("color", tileTray)),
       R.map(getTile)
     )(R.keys(game.tiles));
 
     const checkTileColor = (tile, color) => tile.color == color;
     R.mapObjIndexed((dups, id) => {
       let tile = getTile(id);
-      if (!checkTileColor(tile, color)) return;
+      if (!checkTileColor(tile, tileTray)) return;
 
       // Merge tile with game tile
       if (R.is(Object, game.tiles[id])) {
@@ -279,19 +279,19 @@ const server = app.listen(9000);
 
   // Board18 Tiles
   for (let j = 0; j < trayNames.length; j++) {
-    let color = trayNames[j];
+    let tileTray = trayNames[j];
 
-    let width = tileCounts[color] * 150;
+    let width = tileCounts[tileTray] * 150;
     let height = 900;
 
-    console.log(`Printing ${bname}/${folder}/${id}/${capitalize(color)}.png`);
+    console.log(`Printing ${bname}/${folder}/${id}/${capitalize(tileTray)}.png`);
     await page.goto(
-      `http://localhost:9000/games/${bname}/b18/tiles/${color}?print=true`,
+      `http://localhost:9000/games/${bname}/b18/tiles/${tileTray}?print=true`,
       { waitUntil: "networkidle2" }
     );
     await page.setViewport({ width, height });
     await page.screenshot({
-      path: `build/render/${bname}/${folder}/${id}/${capitalize(color)}.png`,
+      path: `build/render/${bname}/${folder}/${id}/${capitalize(tileTray)}.png`,
       omitBackground: true,
     });
   }
